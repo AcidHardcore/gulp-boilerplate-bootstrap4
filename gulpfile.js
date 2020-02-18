@@ -9,6 +9,8 @@ var settings = {
   polyfills: true,
   styles: true,
   svgs: true,
+  sprite: true,
+  images: true,
   copy: true,
   reload: true
 };
@@ -29,6 +31,10 @@ var paths = {
   styles: {
     input: 'src/sass/**/*.{scss,sass}',
     output: 'dist/css/'
+  },
+  images: {
+    input: 'src/img/**/*.{jpg,jpeg,gif,png}',
+    output: 'dist/img/'
   },
   svgs: {
     input: 'src/svg/*.svg',
@@ -88,6 +94,9 @@ var inlineSVG = require('postcss-inline-svg');
 // SVGs
 var svgmin = require('gulp-svgmin');
 var svgstore = require('gulp-svgstore');
+
+//Images
+var imagemin = require('gulp-imagemin');
 
 // BrowserSync
 var browserSync = require('browser-sync');
@@ -237,7 +246,7 @@ var buildSVGs = function (done) {
 var svgSprite =  function (done) {
 
   // Make sure this feature is activated before running
-  if (!settings.svgs) return done();
+  if (!settings.sprite) return done();
 
   return src(paths.svgs.input)
     .pipe(svgmin(function (file) {
@@ -255,6 +264,28 @@ var svgSprite =  function (done) {
 };
 
 // Copy static files into output folder
+var images = function (done) {
+
+  // Make sure this feature is activated before running
+  if (!settings.images) return done();
+
+  // optimize images
+  return src(paths.images.input)
+    .pipe(imagemin([
+      imagemin.gifsicle({interlaced: true}),
+      imagemin.mozjpeg({quality: 70, progressive: true}),
+      imagemin.optipng({optimizationLevel: 5}),
+      // imagemin.svgo({
+      //   plugins: [
+      //     {removeViewBox: true},
+      //     {cleanupIDs: false}
+      //   ]
+      // })
+    ]))
+    .pipe(dest(paths.images.output));
+
+};
+
 var copyFiles = function (done) {
 
   // Make sure this feature is activated before running
@@ -312,6 +343,7 @@ exports.default = series(
     buildStyles,
     buildSVGs,
     svgSprite,
+    images,
     copyFiles
   )
 );
