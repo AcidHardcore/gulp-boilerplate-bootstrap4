@@ -87,6 +87,7 @@ var inlineSVG = require('postcss-inline-svg');
 
 // SVGs
 var svgmin = require('gulp-svgmin');
+var svgstore = require('gulp-svgstore');
 
 // BrowserSync
 var browserSync = require('browser-sync');
@@ -232,6 +233,27 @@ var buildSVGs = function (done) {
 
 };
 
+//make SVG sprite
+var svgSprite =  function (done) {
+
+  // Make sure this feature is activated before running
+  if (!settings.svgs) return done();
+
+  return src(paths.svgs.input)
+    .pipe(svgmin(function (file) {
+      return {
+        plugins: [{
+          cleanupIDs: {
+            minify: true
+          }
+        }]
+      }
+    }))
+    .pipe(svgstore({inlineSvg: true}))
+    .pipe(rename('sprite.svg'))
+    .pipe(dest(paths.svgs.output));
+};
+
 // Copy static files into output folder
 var copyFiles = function (done) {
 
@@ -289,6 +311,7 @@ exports.default = series(
     lintScripts,
     buildStyles,
     buildSVGs,
+    svgSprite,
     copyFiles
   )
 );
