@@ -198,6 +198,9 @@ var buildStyles = function (done) {
       prefix({
         cascade: true,
         remove: true
+      }),
+      mqpacker({
+        sort: true
       })
     ]))
     .pipe(header(banner.main, {package: package}))
