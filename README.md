@@ -89,6 +89,14 @@ Put your [Sass](https://sass-lang.com/) files in the `src/sass` directory.
 
 Gulp generates minified and unminified CSS files. It also includes [autoprefixer](https://github.com/postcss/autoprefixer), which adds vendor prefixes for you.
 
+### Inline SVG
+
+Usages background-image: svg-load('../svg/a-large-file.svg', fill=#fff, stroke=#fff);
+
+### SVG SPrite
+
+Usages <svg width="30" height="30"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/sprite.svg#a-large-file"></use></svg>
+
 ### SVGs
 
 Place SVG files in the `src/svg` directory.
