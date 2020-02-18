@@ -83,6 +83,7 @@ var postcss = require('gulp-postcss');
 var prefix = require('autoprefixer');
 var minify = require('cssnano');
 var mqpacker = require("css-mqpacker");
+var inlineSVG = require('postcss-inline-svg');
 
 // SVGs
 var svgmin = require('gulp-svgmin');
@@ -201,7 +202,8 @@ var buildStyles = function (done) {
       }),
       mqpacker({
         sort: true
-      })
+      }),
+      inlineSVG()
     ]))
     .pipe(header(banner.main, {package: package}))
     .pipe(dest(paths.styles.output))
