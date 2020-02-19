@@ -6,6 +6,7 @@
 var settings = {
   clean: true,
   scripts: true,
+  libs: true,
   polyfills: true,
   styles: true,
   svgs: true,
@@ -26,6 +27,10 @@ var paths = {
   scripts: {
     input: 'src/js/*',
     polyfills: '.polyfill.js',
+    output: 'dist/js/'
+  },
+  libs: {
+    input: 'src/libs/*',
     output: 'dist/js/'
   },
   styles: {
@@ -297,6 +302,17 @@ var copyFiles = function (done) {
 
 };
 
+var copyJSLibs = function (done) {
+
+  // Make sure this feature is activated before running
+  if (!settings.libs) return done();
+
+  // Copy static files
+  return src(paths.libs.input)
+    .pipe(dest(paths.libs.output));
+
+};
+
 // Watch for changes to the src directory
 var startServer = function (done) {
 
@@ -347,7 +363,8 @@ exports.default = series(
     buildSVGs,
     svgSprite,
     images,
-    copyFiles
+    copyFiles,
+    copyJSLibs
   )
 );
 
@@ -373,8 +390,11 @@ exports.images = series(
   svgSprite,
   images
 );
+
 //Copy files
 exports.copyFiles = copyFiles;
+
+
 
 
 
