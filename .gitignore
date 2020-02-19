@@ -9,6 +9,7 @@ test/coverage
 .Spotlight-V100
 .Trashes
 ##dist folder
-dist
+/dist/
 ##PHPStorm
-.idea
+/.idea/
+
