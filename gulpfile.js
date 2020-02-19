@@ -8,9 +8,9 @@ var settings = {
   scripts: true,
   polyfills: true,
   styles: true,
-  svgs: true,
-  sprite: true,
-  images: true,
+  svgs: false,
+  sprite: false,
+  images: false,
   copy: true,
   reload: true
 };
@@ -201,7 +201,7 @@ var buildStyles = function (done) {
   // Run tasks on all Sass files
   return src(paths.styles.input)
     .pipe(sass({
-      includePaths: ['node_modules'],
+      includePaths: ['node_modules/bootstrap/scss/'],
       outputStyle: 'expanded',
       sourceComments: true
     }))

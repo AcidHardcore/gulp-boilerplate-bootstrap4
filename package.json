@@ -47,5 +47,7 @@
 		"node-sass": "4.13.0",
 		"postcss-inline-svg": "^4.1.0"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"bootstrap": "^4.4.1"
+	}
 }
