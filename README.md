@@ -89,6 +89,10 @@ Put your [Sass](https://sass-lang.com/) files in the `src/sass` directory.
 
 Gulp generates minified and unminified CSS files. It also includes [autoprefixer](https://github.com/postcss/autoprefixer), which adds vendor prefixes for you.
 
+### Bootstrap 4
+
+Included to bundle. If not need just comment an import string in the main.scss
+
 ### Inline SVG
 
 Usages background-image: svg-load('../svg/a-large-file.svg', fill=#fff, stroke=#fff);
