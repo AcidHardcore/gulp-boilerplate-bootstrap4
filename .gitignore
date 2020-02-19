@@ -10,3 +10,5 @@ test/coverage
 .Trashes
 ##dist folder
 dist
+##PHPStorm
+.idea

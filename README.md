@@ -97,15 +97,15 @@ Included to bundle. If not need just comment an import string in the main.scss
 
 Usages background-image: svg-load('../svg/a-large-file.svg', fill=#fff, stroke=#fff);
 
-### SVG SPrite
-
-Usages <svg width="30" height="30"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/sprite.svg#a-large-file"></use></svg>
-
 ### SVGs
 
 Place SVG files in the `src/svg` directory.
 
 SVG files will be optimized with [SVGO](https://github.com/svg/svgo) and compiled into `dist/svg`.
+
+### SVG Sprite
+
+Usages <svg width="30" height="30"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/sprite.svg#a-large-file"></use></svg>
 
 ### Copy Files
 
