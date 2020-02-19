@@ -280,12 +280,6 @@ var images = function (done) {
       imagemin.gifsicle({interlaced: true}),
       imagemin.mozjpeg({quality: 70, progressive: true}),
       imagemin.optipng({optimizationLevel: 5}),
-      // imagemin.svgo({
-      //   plugins: [
-      //     {removeViewBox: true},
-      //     {cleanupIDs: false}
-      //   ]
-      // })
     ]))
     .pipe(dest(paths.images.output));
 
@@ -342,7 +336,7 @@ var reloadBrowser = function (done) {
 var watchSource = function (done) {
   watch(paths.scripts.input, series(exports.scripts, reloadBrowser));
   watch(paths.styles.input, series(exports.styles, reloadBrowser));
-  watch([`paths.svgs.input`, `paths.images.input`], series(exports.images, reloadBrowser));
+  watch([paths.svgs.input, paths.images.input], series(exports.assets, reloadBrowser));
   watch(paths.copy.input, series(exports.copyFiles, reloadBrowser));
   done();
 };
@@ -385,7 +379,7 @@ exports.scripts = parallel(
 //Compile styles
 exports.styles = buildStyles;
 
-exports.images = series(
+exports.assets = series(
   buildSVGs,
   svgSprite,
   images
