@@ -6,11 +6,11 @@
 var settings = {
   clean: true,
   scripts: true,
-  polyfills: false,
+  polyfills: true,
   styles: true,
-  svgs: false,
-  sprite: false,
-  images: false,
+  svgs: true,
+  sprite: true,
+  images: true,
   copy: true,
   reload: true
 };
@@ -324,7 +324,10 @@ var reloadBrowser = function (done) {
 
 // Watch for changes
 var watchSource = function (done) {
-  watch(paths.input, series(exports.default, reloadBrowser));
+  watch(paths.scripts.input, series(exports.scripts, reloadBrowser));
+  watch(paths.styles.input, series(exports.styles, reloadBrowser));
+  watch([`paths.svgs.input`, `paths.images.input`], series(exports.images, reloadBrowser));
+  watch(paths.copy.input, series(exports.copyFiles, reloadBrowser));
   done();
 };
 
@@ -355,3 +358,24 @@ exports.watch = series(
   startServer,
   watchSource
 );
+
+//Build and link scripts
+exports.scripts = parallel(
+  buildScripts,
+  lintScripts,
+);
+
+//Compile styles
+exports.styles = buildStyles;
+
+exports.images = series(
+  buildSVGs,
+  svgSprite,
+  images
+);
+//Copy files
+exports.copyFiles = copyFiles;
+
+
+
+
