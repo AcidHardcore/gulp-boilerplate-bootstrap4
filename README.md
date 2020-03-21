@@ -101,11 +101,11 @@ Usages background-image: svg-load('../svg/a-large-file.svg', fill=#fff, stroke=#
 
 Place SVG files in the `src/svg` directory.
 
-SVG files will be optimized with [SVGO](https://github.com/svg/svgo) and compiled into `dist/svg`.
+SVG files will be optimized with [SVGO](https://github.com/svg/svgo) and compiled into `dist/img`.
 
 ### SVG Sprite
 
-Usages <svg width="30" height="30"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/sprite.svg#a-large-file"></use></svg>
+Usages `<svg width="30" height="30"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite.svg#a-large-file"></use></svg>`
 
 ### Copy Files
 
